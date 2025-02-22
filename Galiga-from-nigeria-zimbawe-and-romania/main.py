@@ -63,7 +63,7 @@ for _ in range(4):
 
 score = ()
 
-Noodles = pygame.image.load("Galiga-from-nigeria-zimbawe-and-romania\pictures\Enemy's.png") # image for ship loaded up
+Noodles = pygame.image.load("Galiga-from-nigeria-zimbawe-and-romania\pictures\Donald_trump_ship.png") # image for ship loaded up
 Noodles = pygame.transform.scale(Noodles,(40,40)) #changing size of spacehsip
 Noodles = pygame.transform.rotate(Noodles, 0)
 Noodles_rect = Noodles.get_rect() # This creates a rectangle the same size as the ship
@@ -88,9 +88,11 @@ start_time = time.time()# start time is a time stamp
 while True:
   print(score_counter)
   current_time = time.time() # current time constantly updates
-  pygame.time.delay(10)
   Space.fill("Black")
+  pygame.time.delay(10)
+  text = font.render("Points: " + str(score_counter), True, "white")
   Space.blit(text_screen, text_screen_rect)
+  text_screen.fill("black")
   text_screen.blit(text, (10,10))
 
 
@@ -135,7 +137,7 @@ while True:
         Noodles_rect.x += -15
 
       
-  if key[pygame.K_SPACE] and current_time - start_time >= 0.1:
+  if key[pygame.K_SPACE] and current_time - start_time >= 0.2:
       
       Biden.append(Hindi(Noodles_rect.x, Noodles_rect.y))
       start_time = time.time()

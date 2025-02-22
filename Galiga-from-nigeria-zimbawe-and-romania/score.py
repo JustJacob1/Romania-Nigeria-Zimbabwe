@@ -12,3 +12,6 @@ class Score:
         file =  open("Galiga-from-nigeria-zimbawe-and-romania\highscore.txt", "w")
         file.write(score)
         file.close()
+
+    
+    
