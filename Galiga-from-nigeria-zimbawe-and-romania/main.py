@@ -5,21 +5,44 @@ from Enemy import Enemy
 from laser import Hindi
 import time
 from Enemys import enemy
+from score import Score
+score_counter = 0
+highscore = Score()
+highscore.read_file()
+
+highscore2 = Score()
+highscore2.write_file("This is english")
+highscore2.read_file()
 
 
 pygame.init()
 Space = pygame.display.set_mode((400, 600))
 pygame.display.set_caption('Space Game')
 
+
+# list that stores all the enemy lasers
 enemy_lasers = []
+# list that stores all of the enemies
 enemies = []
 enemies.append(Enemy(100, 100))
+# this creates the screen for drawing the text on
+text_screen = pygame.Surface((100,20))
+text_screen_rect = text_screen.get_rect()
+text_screen_rect.x = 0
+text_screen_rect.y = 0
+# this creates the font for the text and it's size
+font = pygame.font.SysFont("Arial", 11)
+# this is to create the text with the font that you created, as well as determine its color.
+text = font.render("Points: " + str(score_counter), True, "white")
+
 Biden = []  # this stores all the lasers that I shoot out of the ship.
-Ship_lives = 50000000000000000000
+Ship_lives = 5000000000000000000000000
 
 
 # an object is a thing you make from a class
 
+
+# Creates enemies in specific formation
 x = 50 
 y = 10
 multiple_enemy = []
@@ -38,9 +61,9 @@ for _ in range(4):
 
 # multiple_enemy[0] = enemy(0,0)
 
+score = ()
 
-
-Noodles = pygame.image.load("Galiga-from-nigeria-zimbawe-and-romania/pictures/Donald_trump_ship.png") # image for ship loaded up
+Noodles = pygame.image.load("Galiga-from-nigeria-zimbawe-and-romania\pictures\Enemy's.png") # image for ship loaded up
 Noodles = pygame.transform.scale(Noodles,(40,40)) #changing size of spacehsip
 Noodles = pygame.transform.rotate(Noodles, 0)
 Noodles_rect = Noodles.get_rect() # This creates a rectangle the same size as the ship
@@ -63,9 +86,14 @@ start_time = time.time()# start time is a time stamp
 
 
 while True:
+  print(score_counter)
   current_time = time.time() # current time constantly updates
   pygame.time.delay(10)
   Space.fill("Black")
+  Space.blit(text_screen, text_screen_rect)
+  text_screen.blit(text, (10,10))
+
+
   enemies[0].update(Space, Noodles_rect.x, enemy_lasers, Noodles_rect)
   for lasers in enemy_lasers:
       if lasers.rect.colliderect(Noodles_rect):
@@ -77,8 +105,15 @@ while True:
           
           
   Space.blit(Noodles, Noodles_rect)
+  # check to see whether lasers hit enemy
   for enemy in multiple_enemy:
-      enemy.update(Space)
+      enemy.update(Space, multiple_enemy, enemy_lasers)
+      for laser in Biden:
+          if enemy.rect.colliderect(laser.rect):
+                multiple_enemy.remove(enemy)
+                score_counter += 10
+                Biden.remove(laser)
+        
 
   key = pygame.key.get_pressed()
   if key[pygame.K_RIGHT]:
@@ -98,8 +133,9 @@ while True:
 
   if key[pygame.K_a]:
         Noodles_rect.x += -15
+
       
-  if key[pygame.K_SPACE] and current_time - start_time >= 0.5:
+  if key[pygame.K_SPACE] and current_time - start_time >= 0.1:
       
       Biden.append(Hindi(Noodles_rect.x, Noodles_rect.y))
       start_time = time.time()
@@ -109,7 +145,7 @@ while True:
       Donald.update(Space)
       if Donald.rect.y < 0 or Donald.rect.colliderect(enemies[0].rect): 
           Biden.remove(Donald)
-          
+          score_counter += 50
           
     
       
