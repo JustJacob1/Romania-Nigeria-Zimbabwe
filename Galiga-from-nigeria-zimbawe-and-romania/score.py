@@ -13,5 +13,7 @@ class Score:
         file.write(score)
         file.close()
 
-    
-    
+    def high_score(self, points, high_score):
+        if points > high_score:
+            self.write_file(points)
+        

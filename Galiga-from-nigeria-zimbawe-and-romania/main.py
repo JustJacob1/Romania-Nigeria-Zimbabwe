@@ -8,11 +8,8 @@ from Enemys import enemy
 from score import Score
 score_counter = 0
 highscore = Score()
-highscore.read_file()
-
-highscore2 = Score()
-highscore2.write_file("This is english")
-highscore2.read_file()
+current_highscore = int(highscore.read_file)
+highscore.high_score(score_counter, current_highscore)
 
 
 pygame.init()

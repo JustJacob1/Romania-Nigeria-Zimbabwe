@@ -13,7 +13,7 @@ class enemy:
         self.rect.x = x
         self.rect.y = y
         self.damage = 1
-        self.random_laser_time = random.randint(1,10)
+        self.random_laser_time = random.randint(7,9)
         self.life = 1
         self.start_time = time.time()
 
@@ -49,7 +49,7 @@ class enemy:
         self.enemy_movement(list)
         if current_time - self.start_time >= self.random_laser_time:
             lasers.append(lasar(self.rect.x, self.rect.y))
-            self.random_laser_time = random.randint(1,250)
+            self.random_laser_time = random.randint(7,9)
             self.start_time = time.time()
             
 
