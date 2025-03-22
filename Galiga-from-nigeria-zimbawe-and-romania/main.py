@@ -8,8 +8,7 @@ from Enemys import enemy
 from score import Score
 score_counter = 0
 highscore = Score()
-current_highscore = int(highscore.read_file)
-highscore.high_score(score_counter, current_highscore)
+#current_highscore = int(highscore.read_file)
 
 
 pygame.init()
@@ -83,7 +82,8 @@ start_time = time.time()# start time is a time stamp
 
 
 while True:
-  print(score_counter)
+  highscore.high_score(score_counter, highscore.read_file())
+
   current_time = time.time() # current time constantly updates
   Space.fill("Black")
   pygame.time.delay(10)
